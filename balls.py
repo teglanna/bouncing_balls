@@ -45,17 +45,20 @@ def new_head(balls):
 			balls[k].setheading(360-head)
 	return head			
 
+class Ball(turtle.Turtle):
+	def __init__(self):
+		super(Ball,self).__init__()
+		self.shape('circle')
+		self.fillcolor('blue')
+		self.speed(0)
+		self.penup()
+		self.setheading(random.randint(1, 359))
 
 def createBalls(num_balls):
 	balls = []
 	for k in range(0, num_balls):
-		new_ball = turtle.Turtle()
-		new_ball.shape('circle')
-		new_ball.fillcolor('blue')
-		new_ball.speed(0)
-		new_ball.penup()
-		new_ball.setheading(random.randint(1, 359))
-		balls.append(new_ball)
+		my_ball = Ball()
+		balls.append(my_ball)
 
 	return balls	
 
