@@ -89,11 +89,6 @@ while not terminate:
 	for k in range(0, len(balls)):
 		balls[k].forward(15)
 
-		#if two balls next to each other
-		if balls[k].ycor() == balls[k-1].ycor() and balls[k].xcor() == balls[k-1].xcor():
-			new_head(balls[k])
-			new_head(balls[k-1])
-
 		if left_edge(balls[k], screen_width):
 			balls[k].setheading(balls[k].bounce('right'))
 		elif right_edge(balls[k], screen_width):
