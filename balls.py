@@ -27,15 +27,6 @@ def bottom_edge(ball, screen_height):
 	else:
 		return False			
 
-def bounceBall(ball, new_direction):
-	if new_direction == 'left' or new_direction == 'right':
-		new_heading = 180 - ball.heading() #returns the turtles current heading
-	elif new_direction == 'down' or new_direction == 'up':
-		new_heading = 360 - ball.heading()
-
-	return new_heading	
-
-
 def new_head(balls):
 	for k in range(0, len(balls)):
 		head = balls[k].heading()
@@ -53,6 +44,16 @@ class Ball(turtle.Turtle):
 		self.speed(0)
 		self.penup()
 		self.setheading(random.randint(1, 359))
+
+	def bounce(self, new_direction):
+		if new_direction == 'left' or new_direction == 'right':
+			new_heading = 180 - self.heading()
+		elif new_direction == 'down' or new_direction == 'up':
+			new_heading = 360 - self.heading()
+
+		return new_heading
+
+
 
 def createBalls(num_balls):
 	balls = []
@@ -90,17 +91,17 @@ while not terminate:
 
 		#if two balls next to each other
 		if balls[k].ycor() == balls[k-1].ycor() and balls[k].xcor() == balls[k-1].xcor():
-			new_head(ball[k])
+			new_head(balls[k])
 			new_head(balls[k-1])
 
 		if left_edge(balls[k], screen_width):
-			balls[k].setheading(bounceBall(balls[k], 'right'))
+			balls[k].setheading(balls[k].bounce('right'))
 		elif right_edge(balls[k], screen_width):
-			balls[k].setheading(bounceBall(balls[k], 'left'))
+			balls[k].setheading(balls[k].bounce('left'))
 		elif top_edge(balls[k], screen_height):
-			balls[k].setheading(bounceBall(balls[k], 'down'))
+			balls[k].setheading(balls[k].bounce('down'))
 		elif bottom_edge(balls[k], screen_height):
-			balls[k].setheading(bounceBall(balls[k], 'up'))		
+			balls[k].setheading(balls[k].bounce('up'))		
 
 		if time.time() - start_time > num_seconds:
 			terminate = True	
