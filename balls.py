@@ -2,7 +2,34 @@ import turtle
 import random
 import time
 
-	
+
+class Ball(turtle.Turtle):
+	def __init__(self):
+		super(Ball,self).__init__()
+		self.shape('circle')
+		self.fillcolor('blue')
+		self.speed(0)
+		self.penup()
+		self.setheading(random.randint(1, 359))
+
+	def bounce(self, new_direction):
+		if new_direction == 'left' or new_direction == 'right':
+			new_heading = 180 - self.heading()
+		elif new_direction == 'down' or new_direction == 'up':
+			new_heading = 360 - self.heading()
+
+		return new_heading
+		
+
+def createBalls(num_balls):
+	balls = []
+	for k in range(0, num_balls):
+		my_ball = Ball()
+		balls.append(my_ball)
+
+	return balls	
+
+
 def left_edge(ball, screen_width):
 	if ball.xcor() < -screen_width / 2:
 		return True
@@ -36,32 +63,6 @@ def new_head(balls):
 			balls[k].setheading(360-head)
 	return head			
 
-class Ball(turtle.Turtle):
-	def __init__(self):
-		super(Ball,self).__init__()
-		self.shape('circle')
-		self.fillcolor('blue')
-		self.speed(0)
-		self.penup()
-		self.setheading(random.randint(1, 359))
-
-	def bounce(self, new_direction):
-		if new_direction == 'left' or new_direction == 'right':
-			new_heading = 180 - self.heading()
-		elif new_direction == 'down' or new_direction == 'up':
-			new_heading = 360 - self.heading()
-
-		return new_heading
-
-
-
-def createBalls(num_balls):
-	balls = []
-	for k in range(0, num_balls):
-		my_ball = Ball()
-		balls.append(my_ball)
-
-	return balls	
 
 #init screen size
 screen_width = 800
